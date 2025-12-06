@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build SoftBody2D!!!!!!",
+      "label": "Build SoftBody2D!!!!!!!!!",
       "type": "shell",
       "command": "cmd",
       "args": [
