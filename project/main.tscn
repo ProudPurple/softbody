@@ -1,43 +1,63 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=6 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cfycd5omgtqnu" path="res://rigid_body_2d_2.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://c2jofc8k5vi1x" path="res://static_body_2d.gd" id="3_h2yge"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ig7tw"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
 friction = 0.0
 bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xm2m"]
+radius = 82.85529
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1278, -6)
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.1, 0.1)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(2538, 148)
-physics_material_override = SubResource("PhysicsMaterial_ig7tw")
+position = Vector2(2788, 970)
+physics_material_override = SubResource("PhysicsMaterial_0xm2m")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
-position = Vector2(4, -1)
+position = Vector2(-11, 14)
 texture = ExtResource("1_ig7tw")
+offset = Vector2(3, 0)
+metadata/_edit_lock_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
-position = Vector2(3, 197)
-polygon = PackedVector2Array(-63, -262, 67, -262, 64, -135, -63, -135)
-one_way_collision_margin = 3.5
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(-11, 5)
+shape = SubResource("CircleShape2D_0xm2m")
+metadata/_edit_lock_ = true
 
-[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+[node name="RigidBody2D3" type="RigidBody2D" parent="."]
+position = Vector2(2079, 101)
 mass = 1000.0
-gravity_scale = 0.0
+gravity_scale = 8.0
 lock_rotation = true
 freeze = true
 script = ExtResource("2_0xm2m")
 
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D2"]
-invert_enabled = true
+[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D3"]
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
 
-[node name="SoftBody2D" type="SoftBody2D" parent="RigidBody2D2"]
+[node name="SoftBody2D" type="SoftBody2D" parent="RigidBody2D3"]
 top_level = true
+position = Vector2(2553, 123)
+polygon = PackedVector2Array(-61, 34, 3780, -2444, 44, 414, -2990, 1804)
+one_way_collision = true
+one_way_collision_margin = 96.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+script = ExtResource("3_h2yge")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(4, 4)
+rotation = 3.1415927
 build_mode = 1
-polygon = PackedVector2Array(1663, 445, 2833, -299, 3240, 713, 1965, 700)
+polygon = PackedVector2Array(-5228, 1433, -5228, -1975, 881, -1910, 724.00006, 711.99994)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+invert_enabled = true

@@ -1,3 +1,4 @@
+@tool
 extends RigidBody2D
 
 # Get references to your nodes (ensure they are set up in the scene)
@@ -5,13 +6,18 @@ extends RigidBody2D
 @onready var polygon_shape = $Polygon2D
 # @onready var parent_physics_body = $StaticBody2D # If needed
 
+func _notification(what: int) -> void:
+	if what ==NOTIFICATION_WORLD_2D_CHANGED:
+		_process(0)
+
 func _ready():
 	# Link the points directly
 	polygon_shape.polygon = collision_shape.polygon
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	polygon_shape.polygon = collision_shape.polygon
 	polygon_shape.position = collision_shape.position
+	polygon_shape.rotation = collision_shape.rotation
 	
 	# Optional: If your Polygon2D is a child of the physics body,
 	# you might need to add the collision shape dynamically or adjust positioning.
