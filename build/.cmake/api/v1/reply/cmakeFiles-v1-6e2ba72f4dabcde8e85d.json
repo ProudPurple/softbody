@@ -1,0 +1,208 @@
+{
+	"globsDependent" : 
+	[
+		{
+			"expression" : "C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/*.cpp",
+			"paths" : 
+			[
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/classes/editor_plugin_registration.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/classes/low_level.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/classes/wrapped.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/core/class_db.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/core/error_macros.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/core/memory.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/core/method_bind.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/core/object.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/core/print_string.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/godot.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/aabb.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/basis.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/callable_custom.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/callable_method_pointer.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/char_string.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/color.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/packed_arrays.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/plane.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/projection.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/quaternion.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/rect2.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/rect2i.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/transform2d.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/transform3d.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/variant.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/variant_internal.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/vector2.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/vector2i.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/vector3.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/vector3i.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/vector4.cpp",
+				"C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/src/variant/vector4i.cpp"
+			],
+			"recurse" : true
+		}
+	],
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"path" : "cmake/godotcpp.cmake"
+		},
+		{
+			"path" : "cmake/GodotCPPModule.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/FindPython3.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/FindPython/Support.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"path" : "cmake/common_compiler_flags.cmake"
+		},
+		{
+			"path" : "cmake/android.cmake"
+		},
+		{
+			"path" : "cmake/ios.cmake"
+		},
+		{
+			"path" : "cmake/linux.cmake"
+		},
+		{
+			"path" : "cmake/macos.cmake"
+		},
+		{
+			"path" : "cmake/web.cmake"
+		},
+		{
+			"path" : "cmake/windows.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/ProcessorCount.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/3.30.4/CMakeSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/3.30.4/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Platform/Windows.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Compiler/MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Compiler/MSVC.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Platform/Windows-MSVC-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/Platform/Windows-MSVC.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/3.30.4/CMakeRCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeRCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Users/ander/mingw64/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"path" : "cmake/emsdkHack.cmake"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build",
+		"source" : "C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 1
+	}
+}

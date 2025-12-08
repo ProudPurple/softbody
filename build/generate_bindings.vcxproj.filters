@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\gdextension\extension_api.json" />
+    <CustomBuild Include="C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\aa145f473bfc4b55ab21683910481f45\generate_bindings.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\generate_bindings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{01981985-AF92-3F8C-B977-A78AE04AB5C6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

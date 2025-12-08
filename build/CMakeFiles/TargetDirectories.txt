@@ -1,0 +1,4 @@
+C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/generate_bindings.dir
+C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/godot-cpp.dir
+C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/ZERO_CHECK.dir

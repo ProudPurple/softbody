@@ -1,31 +1,62 @@
 #pragma once
 #include <godot_cpp/classes/node.hpp>
+#include <vector>
 #include <godot_cpp/classes/tween.hpp>
+#include <godot_cpp/classes/geometry2d.hpp>
+#include <godot_cpp/classes/rigid_body2d.hpp>
 #include <godot_cpp/classes/method_tweener.hpp>
-#include <godot_cpp/classes/polygon2d.hpp>
 #include <godot_cpp/classes/collision_polygon2d.hpp>
+#include <godot_cpp/classes/area2d.hpp>
 
 namespace godot {
 
-class SoftBody2D : public CollisionPolygon2D{
-	GDCLASS(SoftBody2D, CollisionPolygon2D);
+	struct Pending {
+		Vector2 vel;
+		Vector2 pos;
+		RigidBody2D* rb;
+	};
 
-private:
-	double time_passed;
-	PackedVector2Array target_poly;
-	PackedVector2Array cur_poly;
+	struct Spring_Target {
+		Vector2 force;
+		RigidBody2D* rb;
+		Vector2 normal;
+		bool active;
+	};
 
-protected:
-	static void _bind_methods();
+	class SoftBody2D : public Area2D{
+		GDCLASS(SoftBody2D, Area2D);
 
-public:
-	SoftBody2D();
-	~SoftBody2D();
+	private:
+		double time_passed;
+		CollisionPolygon2D* poly;
+		PackedVector2Array target_poly;
+		PackedVector2Array init_poly;
+		PackedVector2Array pending_poly;
+		float RETURN_FORCE;
+		float IMPACT_FORCE;
+		float MAX_FORCE;
+		float BODY_FORCE;
+		float MAX_DEFORM;
+		float SPRING_FORCE;
+		Spring_Target spring;
+		std::vector<Pending> pending;
 
-	void _ready();
-	void _process(double delta) override;
-	void update_polygon();
-	void define_new_polygon();
-};
+	protected:
+		static void _bind_methods();
+
+	public:
+		SoftBody2D();
+		~SoftBody2D();
+
+		void _ready();
+		//void _physics_process(double delta);
+		void _bind_method();
+		void _process(double delta) override;
+		void _on_body_entered(Node *body);
+		void _on_body_exited(Node *body);
+		bool is_point_in_polygon(const Vector2 &point, const PackedVector2Array &poly);
+		Vector2 _calculate_surface(RigidBody2D *body);
+		void _deform_poly(Vector2 vel, Vector2 pos);
+	};
 
 } // namespace godot

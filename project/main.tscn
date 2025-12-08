@@ -1,25 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=5 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://cfycd5omgtqnu" path="res://rigid_body_2d_2.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://dqgg2sc2fs0u6" path="res://soft_body_2d.gd" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://c2jofc8k5vi1x" path="res://static_body_2d.gd" id="3_h2yge"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
 friction = 0.0
 bounce = 1.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0xm2m"]
-radius = 82.85529
-
 [node name="Node2D" type="Node2D"]
+position = Vector2(2253, 730)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1384, -45)
-zoom = Vector2(0.1, 0.1)
+position = Vector2(-548, -478)
+zoom = Vector2(0.05, 0.05)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(2788, 970)
+position = Vector2(-1801, -339)
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
+can_sleep = false
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 z_index = 1
@@ -28,44 +27,71 @@ texture = ExtResource("1_ig7tw")
 offset = Vector2(3, 0)
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(-11, 5)
-shape = SubResource("CircleShape2D_0xm2m")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(-65, -49, -171, 80, 151, 78, 50, -49)
 metadata/_edit_lock_ = true
 
-[node name="RigidBody2D3" type="RigidBody2D" parent="."]
-position = Vector2(2079, 101)
-mass = 1000.0
-gravity_scale = 8.0
-lock_rotation = true
-freeze = true
-script = ExtResource("2_0xm2m")
+[node name="SoftBody2D5" type="SoftBody2D" parent="."]
+position = Vector2(4, 4)
+rotation = -3.1415918
+script = ExtResource("3_1bvp3")
 
-[node name="SoftBody2D" type="SoftBody2D" parent="RigidBody2D3"]
-top_level = true
-position = Vector2(-4196, 4282)
-polygon = PackedVector2Array(9927, -8936, 15208, -9707, 11472, -6849, 8438, -5459)
-one_way_collision_margin = 96.0
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D5"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(1695.2893, 1571.6567, 938.90076, 854.9453, 925.4781, -26047.375, 1790.371, -25062.602)
 
-[node name="Polygon2D" type="Polygon2D" parent="RigidBody2D3"]
-position = Vector2(-4196, 4282)
-invert_border = 0.1
-polygon = PackedVector2Array(9927, -8936, 15208, -9707, 11472, -6849, 8438, -5459)
-metadata/_edit_lock_ = true
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D5"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(1695.2893, 1571.6567, 938.90076, 854.9453, 925.4781, -26047.375, 1790.371, -25062.602)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 script = ExtResource("3_h2yge")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(4, 4)
-rotation = 3.1415927
-build_mode = 1
-polygon = PackedVector2Array(-7019.9995, 2983.0007, -6898.0005, -3124.9995, 4042.9998, -2968.0002, 4218.0005, 3174.9995)
-metadata/_edit_lock_ = true
+position = Vector2(1283, 1416)
+polygon = PackedVector2Array(-698, 65, -2089, -213, -3820, -244, -1811, -1140)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+
+[node name="SoftBody2D6" type="SoftBody2D" parent="."]
+script = ExtResource("3_1bvp3")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D6"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(-2473.5593, -17813.537, -2998.0916, -17218.145, -2974.1072, -21628.5, -2805.355, -24010.04)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D6"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(-2473.5593, -17813.537, -2998.0916, -17218.145, -2974.1072, -21628.5, -2805.355, -24010.04)
+
+[node name="SoftBody2D7" type="SoftBody2D" parent="."]
 position = Vector2(4, 4)
-rotation = 3.1415927
-invert_enabled = true
-polygon = PackedVector2Array(-7019.9995, 2983.0007, -6898.0005, -3124.9995, 4042.9998, -2968.0002, 4218.0005, 3174.9995)
-metadata/_edit_lock_ = true
+rotation = -3.14159
+script = ExtResource("3_1bvp3")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D7"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(-1729.4442, 3253.4531, -2879.3057, 1839.7603, -2905.0095, -27071.59, -1952.4564, -25880.848)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D7"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(-1729.4442, 3253.4531, -2879.3057, 1839.7603, -2905.0095, -27071.59, -1952.4564, -25880.848)
+
+[node name="SoftBody2D8" type="SoftBody2D" parent="."]
+script = ExtResource("3_1bvp3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D8"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(1695.2893, 1571.6567, -2432.4365, 1893.416, -2697.1313, -2903.5059, 1772.3842, -2144.5547)
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D8"]
+position = Vector2(2146.8152, 3279.0083)
+scale = Vector2(3.5021677, 0.35439318)
+polygon = PackedVector2Array(1695.2893, 1571.6567, -2432.4365, 1893.416, -2697.1313, -2903.5059, 1772.3842, -2144.5547)

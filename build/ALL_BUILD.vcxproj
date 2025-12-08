@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x86</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ResolveNugetPackages>false</ResolveNugetPackages>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|win32">
+      <Configuration>Debug</Configuration>
+      <Platform>win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|win32">
+      <Configuration>Release</Configuration>
+      <Platform>win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|win32">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|win32">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{90501653-34F3-3DF9-B003-06452AD44D85}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>win32</Platform>
+    <ProjectName>ALL_BUILD</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'">
+    <Midl>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">Building Custom Rule C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">setlocal
+C:\Users\ander\mingw64\bin\cmake.exe -SC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp -BC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build --check-stamp-file C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeCXXCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeRCCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeSystem.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\cmake.verify_globs;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\GodotCPPModule.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\android.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\common_compiler_flags.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\emsdkHack.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\godotcpp.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\ios.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\linux.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\macos.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\web.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageMessage.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython\Support.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython3.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\ProcessorCount.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|win32'">Building Custom Rule C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|win32'">setlocal
+C:\Users\ander\mingw64\bin\cmake.exe -SC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp -BC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build --check-stamp-file C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeCXXCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeRCCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeSystem.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\cmake.verify_globs;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\GodotCPPModule.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\android.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\common_compiler_flags.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\emsdkHack.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\godotcpp.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\ios.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\linux.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\macos.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\web.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageMessage.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython\Support.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython3.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\ProcessorCount.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'">Building Custom Rule C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'">setlocal
+C:\Users\ander\mingw64\bin\cmake.exe -SC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp -BC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build --check-stamp-file C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeCXXCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeRCCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeSystem.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\cmake.verify_globs;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\GodotCPPModule.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\android.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\common_compiler_flags.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\emsdkHack.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\godotcpp.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\ios.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\linux.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\macos.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\web.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageMessage.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython\Support.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython3.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\ProcessorCount.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|win32'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'">Building Custom Rule C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'">setlocal
+C:\Users\ander\mingw64\bin\cmake.exe -SC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/godot-cpp -BC:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build --check-stamp-file C:/Users/ander/OneDrive/Desktop/Work/Coding/Godot/softbody/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeCXXCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeRCCompiler.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\3.30.4\CMakeSystem.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\cmake.verify_globs;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\GodotCPPModule.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\android.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\common_compiler_flags.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\emsdkHack.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\godotcpp.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\ios.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\linux.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\macos.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\web.cmake;C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\godot-cpp\cmake\windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCXXInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeCommonLanguageInclude.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeGenericSystem.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeInitializeConfigs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeLanguageInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeRCInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInformation.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\CMakeSystemSpecificInitialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Compiler\MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageHandleStandardArgs.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPackageMessage.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython\Support.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\FindPython3.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-Initialize.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows-MSVC.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\Windows.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\Platform\WindowsPaths.cmake;C:\Users\ander\mingw64\share\cmake-3.30\Modules\ProcessorCount.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'">C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|win32'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\ZERO_CHECK.vcxproj">
+      <Project>{015A7343-B198-3CEE-9740-B6512C63CD6F}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\ander\OneDrive\Desktop\Work\Coding\Godot\softbody\build\godot-cpp.vcxproj">
+      <Project>{F5FE810C-D46B-3E59-96F0-6459DA67B75C}</Project>
+      <Name>godot-cpp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
