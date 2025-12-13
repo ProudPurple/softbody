@@ -1,8 +1,12 @@
 #pragma once
 #include <godot_cpp/classes/node.hpp>
 #include <vector>
+#include <unordered_map>
 #include <godot_cpp/classes/tween.hpp>
+#include <godot_cpp/variant/vector2.hpp>
+#include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/geometry2d.hpp>
+#include <godot_cpp/classes/physics_server2d.hpp>
 #include <godot_cpp/classes/rigid_body2d.hpp>
 #include <godot_cpp/classes/method_tweener.hpp>
 #include <godot_cpp/classes/collision_polygon2d.hpp>
@@ -20,7 +24,9 @@ namespace godot {
 		Vector2 force;
 		RigidBody2D* rb;
 		Vector2 normal;
+		Vector2 relase;
 		float buildUp;
+		Vector2 prev;
 		bool active;
 	};
 
@@ -38,6 +44,7 @@ namespace godot {
 		float MAX_FORCE;
 		float SPRING_FORCE;
 		Spring_Target spring;
+		std::unordered_map<RigidBody2D*, Vector2> prev_pos;
 		std::vector<Pending> pending;
 
 	protected:
@@ -55,10 +62,11 @@ namespace godot {
 		void set_impact_force(int s_force);
 		int get_impact_force() const;
 		void set_max_force(int s_force);
+		void _draw();
 		int get_max_force() const;
 		void set_growth_force(int s_force);
 		int get_growth_force() const;
-		void _process(double delta) override;
+		void _physics_process(double delta) override;
 		void _on_body_entered(Node *body);
 		void _on_body_exited(Node *body);
 		bool is_point_in_polygon(const Vector2 &point, const PackedVector2Array &poly);

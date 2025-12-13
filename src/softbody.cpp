@@ -61,8 +61,31 @@ void SoftBody2D::_ready() {
 
 
 
-void SoftBody2D::_process(double delta) {
+void SoftBody2D::_physics_process(double delta) {
 	time_passed += delta;
+	this->queue_redraw();
+	for (auto it = prev_pos.begin(); it != prev_pos.end(); ) {
+		if (prev_pos.size() != 0) {
+			if (spring.normal != Vector2(0,0))
+				break;
+			RigidBody2D* rb = it->first;
+			Vector2 prev = it->second;
+
+			// Calculate normal using prev_pos
+			Vector2 normal = _calculate_surface(rb);
+
+			if (rb->get_linear_velocity().dot(normal) > 0)
+				normal = -normal;
+			// Update spring if this is the active body
+			if (rb == spring.rb) {
+				spring.normal = normal;
+				spring.prev = prev;
+			}
+
+			// Delete prev_pos immediately after using it
+			it = prev_pos.erase(it); // safe; returns next iterator
+		}
+	}
 	PackedVector2Array new_poly, cur_poly = poly->get_polygon();
 	for (int i = 0; i < cur_poly.size(); i++) {
 		new_poly.push_back(cur_poly[i].lerp(target_poly[i], 5));
@@ -71,32 +94,32 @@ void SoftBody2D::_process(double delta) {
 	if (spring.active) {
         Vector2 vel = spring.rb->get_linear_velocity() * delta;
 
-		Vector2 normal = spring.normal;
-
+		Vector2 normal = spring.normal;	
 		// Separate normal and tangential components
 		Vector2 vel_normal = normal * vel.dot(normal);
 		Vector2 vel_tangent = vel - vel_normal;
-
+		//print_line(normal);
 		// Reverse normal to create slingshot
 		float activation = 2.5;
 		spring.buildUp += (vel.dot(normal) < -activation) ? -vel.dot(normal) : 0;
 		Vector2 slingshot_velocity = -vel_normal;
 		// Optional: gradually add some growth along the normal for springiness
 		slingshot_velocity += normal * SPRING_GROWTH_RATE;
-
+		float decay = exp(-delta / 0.3f);
+		vel_normal *= decay;
+		vel_tangent *= decay;
 		// Target velocity combines tangential motion + slingshot
-		Vector2 target_velocity = vel_tangent + slingshot_velocity;
-
-		// Compute impulse needed to reach target velocity
-		Vector2 impulse = target_velocity - vel;
+		Vector2 target_vel_normal = vel_normal + vel_tangent;
+		Vector2 impulse = (target_vel_normal - vel) * spring.rb->get_mass() * SPRING_GROWTH_RATE / delta;
 		if (vel.dot(normal) >= -activation - 1 && spring.buildUp != 0) {
-			impulse = normal * spring.buildUp * SPRING_FORCE * delta;
+			if (spring.relase == Vector2(0,0))
+				spring.relase = normal;
+			print_line(spring.relase);
+			impulse = -spring.force * spring.relase * spring.buildUp * SPRING_FORCE;
 		}
-
 		// Clamp maximum force
 		if (impulse.length() > MAX_FORCE)
 			impulse = impulse.normalized() * MAX_FORCE;
-
 		// Apply impulse
 		spring.rb->apply_central_impulse(impulse);
     }
@@ -105,10 +128,13 @@ void SoftBody2D::_process(double delta) {
 void SoftBody2D::_on_body_entered(Node *body) {
 	if (body->is_class("RigidBody2D") && !spring.active) {
 		RigidBody2D *rb = Object::cast_to<RigidBody2D>(body);
+		float initial_delta = 1.0 / 60.0f; // approximate 1 frame
+		Vector2 prev_global = rb->get_global_position();
+
+		// Convert to local space
+		prev_pos[rb] = prev_global;
 		Vector2 normal = _calculate_surface(rb);
-		if (rb->get_linear_velocity().dot(normal) > 0)
-    		normal = -normal;
-		spring = {rb->get_linear_velocity(), rb, normal, 0, true};
+		spring = {rb->get_linear_velocity(), rb, Vector2(0,0), Vector2(0,0), 0, Vector2(0,0), true};
 		print_line("START");
 	}
 }
@@ -142,43 +168,73 @@ bool SoftBody2D::is_point_in_polygon(const Vector2 &point, const PackedVector2Ar
     return inside;
 }
 
+void SoftBody2D::_draw() {
+	if (spring.rb) {
+		Vector2 prev_local = to_local(prev_pos[spring.rb]);
+		Vector2 curr_local = to_local(spring.rb->get_global_position());
 
-Vector2 SoftBody2D::_calculate_surface(RigidBody2D* body) {
-	PackedVector2Array cur_poly = poly->get_polygon();
-float dist = 1e6;  // large initial distance
-int ind = -1;
-std::vector<Vector2> normals;
 
-Vector2 body_pos = to_local(body->get_position());
+        Color col = Color(1, 0, 0); // red
+        draw_line(prev_local, curr_local, col, 50.0); // 2 pixels thick
 
-for (int i = 0; i < cur_poly.size(); i++) {
-    Vector2 a = cur_poly[i];
-    Vector2 b = cur_poly[(i + 1) % cur_poly.size()];
-    Vector2 edge = b - a;
-
-    // Perpendicular normal
-    Vector2 normal = Vector2(-edge.y, edge.x).normalized();
-
-    // Ensure normal points toward the rigid body
-    Vector2 to_body = body_pos - a;
-    if (normal.dot(to_body) < 0.0f)
-        normal = -normal;
-
-    normals.push_back(normal);
-
-    // Distance along this normal to the rigid body
-    float dis = abs(normal.dot(to_body));
-
-    if (dis < dist) {
-        dist = dis;
-        ind = i;
+        // Optional: draw polygon edges
+        PackedVector2Array poly_points = poly->get_polygon();
+        for (int i = 0; i < poly_points.size(); i++) {
+            // SoftBody2D local space
+			PackedVector2Array cur_poly = poly->get_polygon();
+			Vector2 a = poly->to_global(cur_poly[i]);
+				Vector2 b = poly->to_global(cur_poly[(i + 1) % cur_poly.size()]);
+			//print_line(curr_local);
+            draw_line(a, b, Color(0, 1, 0), 5.0); // green edges
+        }
     }
 }
 
-// Return the normal of the closest edge, properly oriented toward the body
-return normals[ind];
+Vector2 SoftBody2D::_calculate_surface(RigidBody2D* body) {
+       if (prev_pos.find(body) == prev_pos.end())
+        return Vector2(0, 0);
 
+    Vector2 p0 = prev_pos[body];
+    Vector2 p1 = body->get_global_position();
+
+    Vector2 motion = body->get_linear_velocity();
+    if (motion.length() == 0)
+        return Vector2(0,0);
+    motion = motion.normalized();
+
+    PackedVector2Array poly_points = poly->get_polygon();
+    Transform2D xf = poly->get_global_transform();
+    Geometry2D* geom = Geometry2D::get_singleton();
+
+    Vector2 best_normal = Vector2(0,0);
+    float best_dot = -FLT_MAX;
+
+    for (int i = 0; i < poly_points.size(); i++) {
+        Vector2 a = xf.xform(poly_points[i]);
+        Vector2 b = xf.xform(poly_points[(i+1)%poly_points.size()]);
+
+        // Check if motion crosses this edge
+        if (!geom->segment_intersects_segment(p0, p1, a, b))
+            continue;
+
+        Vector2 edge = b - a;
+        Vector2 normal(-edge.y, edge.x);
+        normal.normalize();
+
+        // Make sure normal opposes motion
+        if (normal.dot(motion) > 0)
+            normal = -normal;
+
+        float dot = -normal.dot(motion); // how well it opposes motion
+        if (dot > best_dot) {
+            best_dot = dot;
+            best_normal = normal;
+        }
+    }
+
+    return best_normal;
 }
+
 
 /* SUDOCODE TIME
 ON_HIT() {

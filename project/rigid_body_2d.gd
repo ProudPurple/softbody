@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (Input.is_key_pressed(KEY_DOWN)):
 		apply_central_impulse(Vector2(0, 50));
 	elif (Input.is_key_pressed(KEY_UP)):
