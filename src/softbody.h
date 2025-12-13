@@ -20,6 +20,7 @@ namespace godot {
 		Vector2 force;
 		RigidBody2D* rb;
 		Vector2 normal;
+		float buildUp;
 		bool active;
 	};
 
@@ -32,11 +33,9 @@ namespace godot {
 		PackedVector2Array target_poly;
 		PackedVector2Array init_poly;
 		PackedVector2Array pending_poly;
-		float RETURN_FORCE;
 		float IMPACT_FORCE;
+		float SPRING_GROWTH_RATE;
 		float MAX_FORCE;
-		float BODY_FORCE;
-		float MAX_DEFORM;
 		float SPRING_FORCE;
 		Spring_Target spring;
 		std::vector<Pending> pending;
@@ -51,6 +50,14 @@ namespace godot {
 		void _ready();
 		//void _physics_process(double delta);
 		void _bind_method();
+		void set_spring_force(int s_force);
+		int get_spring_force() const;
+		void set_impact_force(int s_force);
+		int get_impact_force() const;
+		void set_max_force(int s_force);
+		int get_max_force() const;
+		void set_growth_force(int s_force);
+		int get_growth_force() const;
 		void _process(double delta) override;
 		void _on_body_entered(Node *body);
 		void _on_body_exited(Node *body);

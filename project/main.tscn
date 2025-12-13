@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cqow47bch5ocs"]
+[gd_scene load_steps=6 format=3 uid="uid://cqow47bch5ocs"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://dqgg2sc2fs0u6" path="res://soft_body_2d.gd" id="3_1bvp3"]
 [ext_resource type="Script" uid="uid://c2jofc8k5vi1x" path="res://static_body_2d.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cse7cosiyfow4" path="res://rigid_body_2d.gd" id="3_lquwl"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
 friction = 0.0
@@ -12,13 +13,47 @@ bounce = 1.0
 position = Vector2(2253, 730)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-548, -478)
-zoom = Vector2(0.05, 0.05)
+position = Vector2(-5779, 10822)
+zoom = Vector2(0.1, 0.1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-11011, 8879)
+script = ExtResource("3_h2yge")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(-14321.022, 9516.614)
+scale = Vector2(0.4326134, 0.3967726)
+polygon = PackedVector2Array(35015.152, -22903.834, 34920.38, -12225.172, 55083.88, -12015.984, 54797.25, -22903.834, 57283.043, -22845.822, 57160.043, -10955.822, 32144.04, -10831.822, 32144.04, -23175.822, 32637.04, -25026.822, 57448.043, -24944.822, 57571.043, -22681.822)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(-14321.022, 9516.614)
+scale = Vector2(0.4326134, 0.3967726)
+polygon = PackedVector2Array(35015.152, -22903.834, 34920.38, -12225.172, 55083.88, -12015.984, 54797.25, -22903.834, 57283.043, -22845.822, 57160.043, -10955.822, 32144.04, -10831.822, 32144.04, -23175.822, 32637.04, -25026.822, 57448.043, -24944.822, 57571.043, -22681.822)
+
+[node name="SoftBody2D8" type="SoftBody2D" parent="."]
+spring_force = 16
+max_force = 100
+growth_force = 16
+position = Vector2(-5844, 2985)
+script = ExtResource("3_1bvp3")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D8"]
+position = Vector2(1152.998, 9064)
+scale = Vector2(1.3213518, 0.15687774)
+polygon = PackedVector2Array(-4028.362, -21315.307, -4016.655, 9915.539, 2315.7085, 10146.922, 2245.1807, -18993.027, 1305.1915, -22012.273, 1340.5981, 3180.082, -2841.954, 3992.7383, -3311.663, -21315.307)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D8"]
+position = Vector2(1152.998, 9064)
+scale = Vector2(1.3213518, 0.15687774)
+polygon = PackedVector2Array(-4028.362, -21315.307, -4016.655, 9915.539, 2315.7085, 10146.922, 2245.1807, -18993.027, 1305.1915, -22012.273, 1340.5981, 3180.082, -2841.954, 3992.7383, -3311.663, -21315.307)
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(-1801, -339)
+position = Vector2(-6034, 10638)
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
+gravity_scale = 0.0
 can_sleep = false
+script = ExtResource("3_lquwl")
 
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 z_index = 1
@@ -30,68 +65,3 @@ metadata/_edit_lock_ = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
 polygon = PackedVector2Array(-65, -49, -171, 80, 151, 78, 50, -49)
 metadata/_edit_lock_ = true
-
-[node name="SoftBody2D5" type="SoftBody2D" parent="."]
-position = Vector2(4, 4)
-rotation = -3.1415918
-script = ExtResource("3_1bvp3")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D5"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(1695.2893, 1571.6567, 938.90076, 854.9453, 925.4781, -26047.375, 1790.371, -25062.602)
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D5"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(1695.2893, 1571.6567, 938.90076, 854.9453, 925.4781, -26047.375, 1790.371, -25062.602)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-script = ExtResource("3_h2yge")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(1283, 1416)
-polygon = PackedVector2Array(-698, 65, -2089, -213, -3820, -244, -1811, -1140)
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-
-[node name="SoftBody2D6" type="SoftBody2D" parent="."]
-script = ExtResource("3_1bvp3")
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D6"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(-2473.5593, -17813.537, -2998.0916, -17218.145, -2974.1072, -21628.5, -2805.355, -24010.04)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D6"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(-2473.5593, -17813.537, -2998.0916, -17218.145, -2974.1072, -21628.5, -2805.355, -24010.04)
-
-[node name="SoftBody2D7" type="SoftBody2D" parent="."]
-position = Vector2(4, 4)
-rotation = -3.14159
-script = ExtResource("3_1bvp3")
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D7"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(-1729.4442, 3253.4531, -2879.3057, 1839.7603, -2905.0095, -27071.59, -1952.4564, -25880.848)
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D7"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(-1729.4442, 3253.4531, -2879.3057, 1839.7603, -2905.0095, -27071.59, -1952.4564, -25880.848)
-
-[node name="SoftBody2D8" type="SoftBody2D" parent="."]
-script = ExtResource("3_1bvp3")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D8"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(1695.2893, 1571.6567, -2432.4365, 1893.416, -2697.1313, -2903.5059, 1772.3842, -2144.5547)
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D8"]
-position = Vector2(2146.8152, 3279.0083)
-scale = Vector2(3.5021677, 0.35439318)
-polygon = PackedVector2Array(1695.2893, 1571.6567, -2432.4365, 1893.416, -2697.1313, -2903.5059, 1772.3842, -2144.5547)

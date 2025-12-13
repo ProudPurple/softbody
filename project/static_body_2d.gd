@@ -13,4 +13,5 @@ func _ready():
 func _process(_delta: float) -> void:
 	polygon_shape.polygon = collision_shape.polygon
 	polygon_shape.position = collision_shape.position
+	polygon_shape.scale = collision_shape.scale
 	polygon_shape.rotation = collision_shape.rotation
