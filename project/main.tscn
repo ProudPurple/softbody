@@ -16,8 +16,8 @@ radius = 81.0
 position = Vector2(2253, 730)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-5527, 10433)
-zoom = Vector2(0.1, 0.1)
+position = Vector2(-6329, 11223)
+zoom = Vector2(0.05, 0.05)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-11011, 8879)
@@ -35,27 +35,9 @@ scale = Vector2(0.4326134, 0.3967726)
 polygon = PackedVector2Array(35015.152, -22903.834, 34920.38, -12225.172, 55083.88, -12015.984, 54797.25, -22903.834, 57283.043, -22845.822, 57160.043, -10955.822, 32144.04, -10831.822, 32144.04, -23175.822, 32637.04, -25026.822, 57448.043, -24944.822, 57571.043, -22681.822)
 metadata/_edit_lock_ = true
 
-[node name="SoftBody2D8" type="SoftBody2D" parent="."]
-spring_force = 1000
-max_force = 100
-growth_force = 1000
-position = Vector2(-5844, 2985)
-script = ExtResource("3_1bvp3")
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D8"]
-position = Vector2(-7689, -1859)
-color = Color(0.20392157, 1, 1, 1)
-polygon = PackedVector2Array(1987, 6395, 2219, 10296, 5007, 11041, 4472, 6255)
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D8"]
-position = Vector2(-7689, -1859)
-polygon = PackedVector2Array(1987, 6395, 2219, 10296, 5007, 11041, 4472, 6255)
-
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(-5763, 12705)
+position = Vector2(-4131, 11400)
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
-gravity_scale = 0.0
 can_sleep = false
 script = ExtResource("3_lquwl")
 
@@ -70,3 +52,71 @@ metadata/_edit_lock_ = true
 position = Vector2(-6, 9)
 shape = SubResource("CircleShape2D_1bvp3")
 metadata/_edit_lock_ = true
+
+[node name="SoftBody2D9" type="SoftBody2D" parent="."]
+spring_force = 256
+max_force = 500
+growth_force = 8
+position = Vector2(-11688, 5970)
+script = ExtResource("3_1bvp3")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D9"]
+position = Vector2(7262, -1854)
+color = Color(0.20392157, 1, 1, 1)
+polygon = PackedVector2Array(-6025, 4789, 3361, 4865, 3361, 6305, -1054, 5921, -901, 7226, -2129, 7341, -2378, 5979, -6102, 5921)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D9"]
+position = Vector2(7262, -1854)
+polygon = PackedVector2Array(-6025, 4789, 3361, 4865, 3361, 6305, -1054, 5921, -901, 7226, -2129, 7341, -2378, 5979, -6102, 5921)
+
+[node name="SoftBody2D10" type="SoftBody2D" parent="."]
+spring_force = 256
+max_force = 500
+growth_force = 8
+position = Vector2(-23376, 11940)
+script = ExtResource("3_1bvp3")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D10"]
+position = Vector2(7262, -1854)
+color = Color(0.20392157, 1, 1, 1)
+polygon = PackedVector2Array(7237, -1047, 7544, 3521, 5490, 3425, 5567, -1642)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D10"]
+position = Vector2(7262, -1854)
+polygon = PackedVector2Array(7237, -1047, 7544, 3521, 5490, 3425, 5567, -1642)
+
+[node name="SoftBody2D11" type="SoftBody2D" parent="."]
+spring_force = 256
+max_force = 500
+growth_force = 8
+position = Vector2(-35064, 17910)
+script = ExtResource("3_1bvp3")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D11"]
+position = Vector2(7262, -1854)
+color = Color(0.20392157, 1, 1, 1)
+polygon = PackedVector2Array(25470, -7190, 25143, -2430, 26372, -2449, 26717, -7420)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D11"]
+position = Vector2(7262, -1854)
+polygon = PackedVector2Array(25470, -7190, 25143, -2430, 26372, -2449, 26717, -7420)
+
+[node name="SoftBody2D12" type="SoftBody2D" parent="."]
+spring_force = 256
+max_force = 500
+growth_force = 8
+position = Vector2(-46752, 23880)
+script = ExtResource("3_1bvp3")
+
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D12"]
+position = Vector2(7262, -1854)
+color = Color(0.20392157, 1, 1, 1)
+polygon = PackedVector2Array(29039, -9436, 38329, -9167, 38290, -8016, 28040, -8265)
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D12"]
+position = Vector2(7262, -1854)
+polygon = PackedVector2Array(29039, -9436, 38329, -9167, 38290, -8016, 28040, -8265)

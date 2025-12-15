@@ -64,18 +64,20 @@ void SoftBody2D::_ready() {
 void SoftBody2D::_physics_process(double delta) {
 	time_passed += delta;
 	this->queue_redraw();
-	for (auto it = prev_pos.begin(); it != prev_pos.end(); ) {
+	for (auto& it : prev_pos) {
 		if (prev_pos.size() != 0) {
 			if (spring.normal != Vector2(0,0))
 				break;
-			RigidBody2D* rb = it->first;
-			Vector2 prev = it->second;
+			RigidBody2D* rb = it.first;
+			Vector2 prev = it.second;
 
 			// Calculate normal using prev_pos
 			Vector2 normal = _calculate_surface(rb);
 
-			if (rb->get_linear_velocity().dot(normal) > 0)
+			if (rb->get_linear_velocity().dot(normal) > 0) {
+				print_line("FLIP");
 				normal = -normal;
+			}
 			// Update spring if this is the active body
 			if (rb == spring.rb) {
 				spring.normal = normal;
@@ -83,7 +85,7 @@ void SoftBody2D::_physics_process(double delta) {
 			}
 
 			// Delete prev_pos immediately after using it
-			it = prev_pos.erase(it); // safe; returns next iterator
+			//it = prev_pos.erase(it); // safe; returns next iterator
 		}
 	}
 	PackedVector2Array new_poly, cur_poly = poly->get_polygon();
@@ -92,44 +94,55 @@ void SoftBody2D::_physics_process(double delta) {
 		target_poly[i] = target_poly[i].lerp(init_poly[i], 3); 
 	}
 	if (spring.active) {
-        Vector2 vel = spring.rb->get_linear_velocity() * delta;
+        Vector2 vel = spring.rb->get_linear_velocity();
 
 		Vector2 normal = spring.normal;	
-		// Separate normal and tangential components
-		Vector2 vel_normal = normal * vel.dot(normal);
-		Vector2 vel_tangent = vel - vel_normal;
-		//print_line(normal);
-		// Reverse normal to create slingshot
-		float activation = 2.5;
-		spring.buildUp += (vel.dot(normal) < -activation) ? -vel.dot(normal) : 0;
-		Vector2 slingshot_velocity = -vel_normal;
-		// Optional: gradually add some growth along the normal for springiness
-		slingshot_velocity += normal * SPRING_GROWTH_RATE;
-		float decay = exp(-delta / 0.3f);
-		vel_normal *= decay;
-		vel_tangent *= decay;
-		// Target velocity combines tangential motion + slingshot
-		Vector2 target_vel_normal = vel_normal + vel_tangent;
-		Vector2 impulse = (target_vel_normal - vel) * spring.rb->get_mass() * SPRING_GROWTH_RATE / delta;
-		if (vel.dot(normal) >= -activation - 1 && spring.buildUp != 0) {
-			if (spring.relase == Vector2(0,0))
-				spring.relase = normal;
-			print_line(spring.relase);
-			impulse = -spring.force * spring.relase * spring.buildUp * SPRING_FORCE;
+		if (normal == Vector2(0,0)) {
+			spring.normal = _calculate_surface(spring.rb);
+		} else {
+			// Separate normal and tangential components
+			Vector2 vel_normal = normal * vel.dot(normal);
+			Vector2 vel_tangent = vel - vel_normal;
+			// Reverse normal to create slingshot
+			float activation = 2.5;
+			spring.buildUp += (vel.dot(normal) < -activation) ? -vel.dot(normal) * delta : 0;
+			Vector2 slingshot_velocity = -vel_normal;
+			// Optional: gradually add some growth along the normal for springiness
+			slingshot_velocity += normal * SPRING_GROWTH_RATE;
+			float decay = exp(-delta / 0.3f);
+			vel_normal *= decay;
+			vel_tangent *= decay;
+			// Target velocity combines tangential motion + slingshot
+			Vector2 target_vel_normal = vel_normal + vel_tangent;
+			Vector2 impulse = (target_vel_normal - vel) * spring.rb->get_mass() * SPRING_GROWTH_RATE;
+			if (vel.dot(normal) >= -activation && spring.buildUp >= 0) {
+				Vector2 force = Vector2(spring.force[0], spring.force[1]).normalized(), flat_norm = Vector2(abs(normal[0]), abs(normal[1]));
+				Vector2 dir = (flat_norm + (Vector2(abs(force[0]), abs(force[1])))).normalized();
+				if (dir.dot(normal) < 0)
+					dir *= -1;
+				impulse = dir * spring.buildUp * SPRING_FORCE * delta;
+				print_line(impulse.dot(normal));
+				print_line(spring.buildUp * SPRING_FORCE * delta);
+				//if (impulse.dot(normal) < 5)
+				//	impulse -= dir * spring.buildUp * SPRING_FORCE / 24;
+			}
+			// Clamp maximum force
+			if (impulse.length() > MAX_FORCE)
+				impulse = impulse.normalized() * MAX_FORCE;
+			// Apply impulse
+			//if (vel.dot(normal) >= -activation - 1 && spring.buildUp != 0) 
+			//	print_line(impulse);
+			spring.rb->apply_central_impulse(impulse);
 		}
-		// Clamp maximum force
-		if (impulse.length() > MAX_FORCE)
-			impulse = impulse.normalized() * MAX_FORCE;
-		// Apply impulse
-		spring.rb->apply_central_impulse(impulse);
     }
 }
 
 void SoftBody2D::_on_body_entered(Node *body) {
 	if (body->is_class("RigidBody2D") && !spring.active) {
 		RigidBody2D *rb = Object::cast_to<RigidBody2D>(body);
-		float initial_delta = 1.0 / 60.0f; // approximate 1 frame
-		Vector2 prev_global = rb->get_global_position();
+		float initial_delta = 1.0 / 30.0f; // approximate 1 frame
+		rb->set_gravity_scale(0);
+		Vector2 prev_global = rb->get_global_position() - rb->get_linear_velocity() * initial_delta;
 
 		// Convert to local space
 		prev_pos[rb] = prev_global;
@@ -142,6 +155,8 @@ void SoftBody2D::_on_body_entered(Node *body) {
 void SoftBody2D::_on_body_exited(Node *body) {
 	if (body->is_class("RigidBody2D")) {
 		spring.active = false;
+		RigidBody2D *rb = Object::cast_to<RigidBody2D>(body);
+		rb->set_gravity_scale(1);
 		print_line("STOP");
 	}
 }
@@ -168,38 +183,20 @@ bool SoftBody2D::is_point_in_polygon(const Vector2 &point, const PackedVector2Ar
     return inside;
 }
 
-void SoftBody2D::_draw() {
-	if (spring.rb) {
-		Vector2 prev_local = to_local(prev_pos[spring.rb]);
-		Vector2 curr_local = to_local(spring.rb->get_global_position());
-
-
-        Color col = Color(1, 0, 0); // red
-        draw_line(prev_local, curr_local, col, 50.0); // 2 pixels thick
-
-        // Optional: draw polygon edges
-        PackedVector2Array poly_points = poly->get_polygon();
-        for (int i = 0; i < poly_points.size(); i++) {
-            // SoftBody2D local space
-			PackedVector2Array cur_poly = poly->get_polygon();
-			Vector2 a = poly->to_global(cur_poly[i]);
-				Vector2 b = poly->to_global(cur_poly[(i + 1) % cur_poly.size()]);
-			//print_line(curr_local);
-            draw_line(a, b, Color(0, 1, 0), 5.0); // green edges
-        }
-    }
-}
-
 Vector2 SoftBody2D::_calculate_surface(RigidBody2D* body) {
-       if (prev_pos.find(body) == prev_pos.end())
+       if (prev_pos.find(body) == prev_pos.end()) {
+		print_line("NO PAST");
         return Vector2(0, 0);
+	   }
 
     Vector2 p0 = prev_pos[body];
     Vector2 p1 = body->get_global_position();
 
     Vector2 motion = body->get_linear_velocity();
-    if (motion.length() == 0)
+    if (motion.length() == 0) {
+		print_line("NO MOTION");
         return Vector2(0,0);
+	}
     motion = motion.normalized();
 
     PackedVector2Array poly_points = poly->get_polygon();

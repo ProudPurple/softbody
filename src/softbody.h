@@ -62,7 +62,6 @@ namespace godot {
 		void set_impact_force(int s_force);
 		int get_impact_force() const;
 		void set_max_force(int s_force);
-		void _draw();
 		int get_max_force() const;
 		void set_growth_force(int s_force);
 		int get_growth_force() const;
