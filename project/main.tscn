@@ -7,17 +7,15 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
 friction = 0.0
-bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
 radius = 81.0
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(2253, 730)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-6329, 11223)
-zoom = Vector2(0.05, 0.05)
+position = Vector2(10, 107)
+zoom = Vector2(0.75, 0.75)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-11011, 8879)
@@ -26,17 +24,16 @@ script = ExtResource("3_h2yge")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(-14321.022, 9516.614)
 scale = Vector2(0.4326134, 0.3967726)
-polygon = PackedVector2Array(35015.152, -22903.834, 34920.38, -12225.172, 55083.88, -12015.984, 54797.25, -22903.834, 57283.043, -22845.822, 57160.043, -10955.822, 32144.04, -10831.822, 32144.04, -23175.822, 32637.04, -25026.822, 57448.043, -24944.822, 57571.043, -22681.822)
-metadata/_edit_lock_ = true
+polygon = PackedVector2Array(84671.49, -21918.385, 86398.21, -21918.385, 86338.11, -20728.785, 84761.64, -21026.186)
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
 position = Vector2(-14321.022, 9516.614)
 scale = Vector2(0.4326134, 0.3967726)
-polygon = PackedVector2Array(35015.152, -22903.834, 34920.38, -12225.172, 55083.88, -12015.984, 54797.25, -22903.834, 57283.043, -22845.822, 57160.043, -10955.822, 32144.04, -10831.822, 32144.04, -23175.822, 32637.04, -25026.822, 57448.043, -24944.822, 57571.043, -22681.822)
+polygon = PackedVector2Array(84671.49, -21918.385, 86398.21, -21918.385, 86338.11, -20728.785, 84761.64, -21026.186)
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(-4131, 11400)
+position = Vector2(90, -60)
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
 can_sleep = false
 script = ExtResource("3_lquwl")
@@ -44,79 +41,29 @@ script = ExtResource("3_lquwl")
 [node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
 z_index = 1
 position = Vector2(-11, 14)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ig7tw")
 offset = Vector2(3, 0)
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(-6, 9)
+scale = Vector2(0.25, 0.25)
 shape = SubResource("CircleShape2D_1bvp3")
 metadata/_edit_lock_ = true
 
-[node name="SoftBody2D9" type="SoftBody2D" parent="."]
-spring_force = 256
-max_force = 500
-growth_force = 8
-position = Vector2(-11688, 5970)
+[node name="SoftBody2D13" type="SoftBody2D" parent="."]
+physics_max_force = 20.0
+physics_threshold = 0.01
+position = Vector2(-58440, 29851)
 script = ExtResource("3_1bvp3")
 
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D9"]
-position = Vector2(7262, -1854)
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D13"]
+position = Vector2(4305, -3886)
 color = Color(0.20392157, 1, 1, 1)
-polygon = PackedVector2Array(-6025, 4789, 3361, 4865, 3361, 6305, -1054, 5921, -901, 7226, -2129, 7341, -2378, 5979, -6102, 5921)
+polygon = PackedVector2Array(53688, -26212, 53516, -26047, 53506, -25666, 53654, -25518, 53917, -25516, 54022, -25589, 54018, -25794, 54080, -25872, 54235, -25876, 54303, -25805, 54301, -25604, 54380, -25529, 54717, -25535, 54820, -25621, 54833, -26107, 54693, -26197, 53688, -26212, 53103, -26196, 53097, -26826, 55531, -26771, 55421, -24936, 52987, -24979, 53103, -26196)
 metadata/_edit_lock_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D9"]
-position = Vector2(7262, -1854)
-polygon = PackedVector2Array(-6025, 4789, 3361, 4865, 3361, 6305, -1054, 5921, -901, 7226, -2129, 7341, -2378, 5979, -6102, 5921)
-
-[node name="SoftBody2D10" type="SoftBody2D" parent="."]
-spring_force = 256
-max_force = 500
-growth_force = 8
-position = Vector2(-23376, 11940)
-script = ExtResource("3_1bvp3")
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D10"]
-position = Vector2(7262, -1854)
-color = Color(0.20392157, 1, 1, 1)
-polygon = PackedVector2Array(7237, -1047, 7544, 3521, 5490, 3425, 5567, -1642)
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D10"]
-position = Vector2(7262, -1854)
-polygon = PackedVector2Array(7237, -1047, 7544, 3521, 5490, 3425, 5567, -1642)
-
-[node name="SoftBody2D11" type="SoftBody2D" parent="."]
-spring_force = 256
-max_force = 500
-growth_force = 8
-position = Vector2(-35064, 17910)
-script = ExtResource("3_1bvp3")
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D11"]
-position = Vector2(7262, -1854)
-color = Color(0.20392157, 1, 1, 1)
-polygon = PackedVector2Array(25470, -7190, 25143, -2430, 26372, -2449, 26717, -7420)
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D11"]
-position = Vector2(7262, -1854)
-polygon = PackedVector2Array(25470, -7190, 25143, -2430, 26372, -2449, 26717, -7420)
-
-[node name="SoftBody2D12" type="SoftBody2D" parent="."]
-spring_force = 256
-max_force = 500
-growth_force = 8
-position = Vector2(-46752, 23880)
-script = ExtResource("3_1bvp3")
-
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D12"]
-position = Vector2(7262, -1854)
-color = Color(0.20392157, 1, 1, 1)
-polygon = PackedVector2Array(29039, -9436, 38329, -9167, 38290, -8016, 28040, -8265)
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D12"]
-position = Vector2(7262, -1854)
-polygon = PackedVector2Array(29039, -9436, 38329, -9167, 38290, -8016, 28040, -8265)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D13"]
+position = Vector2(4305, -3886)
+polygon = PackedVector2Array(53688, -26212, 53516, -26047, 53506, -25666, 53654, -25518, 53917, -25516, 54022, -25589, 54018, -25794, 54080, -25872, 54235, -25876, 54303, -25805, 54301, -25604, 54380, -25529, 54717, -25535, 54820, -25621, 54833, -26107, 54693, -26197, 53688, -26212, 53103, -26196, 53097, -26826, 55531, -26771, 55421, -24936, 52987, -24979, 53103, -26196)
