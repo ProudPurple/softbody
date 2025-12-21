@@ -13,6 +13,10 @@ void SoftBody2D::_bind_methods() {
 
 	ClassDB::bind_method(D_METHOD("set_spring_force", "s_force"), &SoftBody2D::set_spring_force);
     ClassDB::bind_method(D_METHOD("get_spring_force"), &SoftBody2D::get_spring_force);
+	ClassDB::bind_method(D_METHOD("set_width", "width"), &SoftBody2D::set_width);
+    ClassDB::bind_method(D_METHOD("get_width"), &SoftBody2D::get_width);
+	ClassDB::bind_method(D_METHOD("set_is_inverted", "invert"), &SoftBody2D::set_is_inverted);
+    ClassDB::bind_method(D_METHOD("get_is_inverted"), &SoftBody2D::get_is_inverted);
 	ClassDB::bind_method(D_METHOD("set_impact_force", "i_force"), &SoftBody2D::set_impact_force);
     ClassDB::bind_method(D_METHOD("get_impact_force"), &SoftBody2D::get_impact_force);
 	ClassDB::bind_method(D_METHOD("set_max_force", "m_force"), &SoftBody2D::set_max_force);
@@ -31,7 +35,12 @@ void SoftBody2D::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_threshold", PROPERTY_HINT_RANGE, "0,15,0.01"),"set_threshold","get_threshold");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_decay_magnitude", PROPERTY_HINT_RANGE, "-1000,1000,0.1"),"set_growth_force","get_growth_force");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_normal_weight", PROPERTY_HINT_RANGE, "0.6,1,0.01"),"set_normal_weight","get_normal_weight");
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "impact_force", PROPERTY_HINT_RANGE, "-1000,1000,0.1"),"set_impact_force","get_impact_force");
+
+	ADD_GROUP("Visual", "visual_");
+
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "visual_impact_force", PROPERTY_HINT_RANGE, "-1000,1000,0.1"),"set_impact_force","get_impact_force");
+	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "visual_invert/inverted", PROPERTY_HINT_TOOL_BUTTON),"set_is_inverted","get_is_inverted");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "visual_invert/external_width", PROPERTY_HINT_RANGE, "-1000,1000,0.1"),"set_width","get_width");
 }
 
 SoftBody2D::SoftBody2D() {
@@ -45,10 +54,16 @@ SoftBody2D::SoftBody2D() {
 	activation = 4;
 	normal_weight = 0.7;
 	force_weight = 0.3;
+	external_width = 500;
+	inverted = true;
 }
 
 void SoftBody2D::set_spring_force(float s_force) { SPRING_FORCE = s_force; }
 float SoftBody2D::get_spring_force() const { return SPRING_FORCE; }
+void SoftBody2D::set_width(float width) { external_width = width; }
+float SoftBody2D::get_width() const { return external_width; }
+void SoftBody2D::set_is_inverted(bool invert) { inverted = invert;}
+bool SoftBody2D::get_is_inverted() const { return inverted; }
 void SoftBody2D::set_threshold(float thresh) { activation = thresh; }
 float SoftBody2D::get_threshold() const { return activation; }
 void SoftBody2D::set_normal_weight(float weight) {normal_weight = weight, force_weight = 1 - weight;}
@@ -68,6 +83,8 @@ void SoftBody2D::_ready() {
 	poly = get_node<CollisionPolygon2D>("CollisionPolygon2D");
 	connect("body_entered", callable_mp(this, &SoftBody2D::_on_body_entered));
 	connect("body_exited", callable_mp(this, &SoftBody2D::_on_body_exited));
+	if (inverted)
+		_create_external(poly, external_width);
 }
 
 void SoftBody2D::_physics_process(double delta) {
@@ -126,6 +143,42 @@ void SoftBody2D::_on_body_entered(Node *body) {
 	}
 }
 
+void SoftBody2D::_create_external(CollisionPolygon2D* poly, float width) {
+	PackedVector2Array pos = poly->get_polygon();
+
+    if (pos.size() < 3) return; // must be a valid polygon
+
+    // Calculate bounding box
+    float min_x = std::numeric_limits<float>::max();
+    float max_x = std::numeric_limits<float>::lowest();
+    float min_y = std::numeric_limits<float>::max();
+    float max_y = std::numeric_limits<float>::lowest();
+
+    for (auto cur : pos) {
+        if (cur.x < min_x) min_x = cur.x;
+        if (cur.x > max_x) max_x = cur.x;
+        if (cur.y < min_y) min_y = cur.y;
+        if (cur.y > max_y) max_y = cur.y;
+    }
+
+    // Close the original polygon
+    pos.push_back(pos[0]);
+
+    // Define outer rectangle around the polygon
+    Vector2 top_left(min_x - width, max_y + width);
+    Vector2 top_right(max_x + width, max_y + width);
+    Vector2 bottom_right(max_x + width, min_y - width);
+    Vector2 bottom_left(min_x - width, min_y - width);
+
+    // Append outer polygon points in consistent order
+    pos.push_back(top_left);
+    pos.push_back(top_right);
+    pos.push_back(bottom_right);
+    pos.push_back(bottom_left);
+    pos.push_back(top_left); // close the outer polygon
+
+    poly->set_polygon(pos);
+}
 void SoftBody2D::_on_body_exited(Node *body) {
 	if (body->is_class("RigidBody2D")) {
 		RigidBody2D *rb = Object::cast_to<RigidBody2D>(body);
@@ -151,13 +204,12 @@ Vector2 SoftBody2D::_calculate_surface(RigidBody2D* rb, SpringTarget spring) {
     Vector2 best_normal = Vector2(0,0);
     float best_dot = -FLT_MAX, best_dist = FLT_MAX;
 
-	for (int i = 0; i < poly_points.size() - 6; i++) {
+	for (int i = 0; i < poly_points.size() - (inverted ? 5 : 0); i++) {
 		Vector2 a = xf.xform(poly_points[i]);
 		Vector2 b = xf.xform(poly_points[(i+1)%poly_points.size()]);
 
 		if (!geom->segment_intersects_segment(p0, p1, a, b))
 			continue;
-
 		Vector2 edge = b - a;
 		Vector2 normal = Vector2(-edge.y, edge.x).normalized();
 

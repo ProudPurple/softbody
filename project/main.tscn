@@ -33,7 +33,7 @@ polygon = PackedVector2Array(84671.49, -21918.385, 86398.21, -21918.385, 86338.1
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(90, -60)
+position = Vector2(172, 222)
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
 can_sleep = false
 script = ExtResource("3_lquwl")
@@ -52,18 +52,18 @@ scale = Vector2(0.25, 0.25)
 shape = SubResource("CircleShape2D_1bvp3")
 metadata/_edit_lock_ = true
 
-[node name="SoftBody2D13" type="SoftBody2D" parent="."]
+[node name="SoftBody2D15" type="SoftBody2D" parent="."]
 physics_max_force = 20.0
 physics_threshold = 0.01
-position = Vector2(-58440, 29851)
+position = Vector2(-1624, 512)
 script = ExtResource("3_1bvp3")
 
-[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D13"]
-position = Vector2(4305, -3886)
+[node name="Polygon2D" type="Polygon2D" parent="SoftBody2D15"]
+position = Vector2(-202, 205)
 color = Color(0.20392157, 1, 1, 1)
-polygon = PackedVector2Array(53688, -26212, 53516, -26047, 53506, -25666, 53654, -25518, 53917, -25516, 54022, -25589, 54018, -25794, 54080, -25872, 54235, -25876, 54303, -25805, 54301, -25604, 54380, -25529, 54717, -25535, 54820, -25621, 54833, -26107, 54693, -26197, 53688, -26212, 53103, -26196, 53097, -26826, 55531, -26771, 55421, -24936, 52987, -24979, 53103, -26196)
+polygon = PackedVector2Array(1207, -911, 1351, -1018, 2399, -1015, 2572, -933, 2531, -362, 2355, -256, 1414, -246, 1254, -356)
 metadata/_edit_lock_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D13"]
-position = Vector2(4305, -3886)
-polygon = PackedVector2Array(53688, -26212, 53516, -26047, 53506, -25666, 53654, -25518, 53917, -25516, 54022, -25589, 54018, -25794, 54080, -25872, 54235, -25876, 54303, -25805, 54301, -25604, 54380, -25529, 54717, -25535, 54820, -25621, 54833, -26107, 54693, -26197, 53688, -26212, 53103, -26196, 53097, -26826, 55531, -26771, 55421, -24936, 52987, -24979, 53103, -26196)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SoftBody2D15"]
+position = Vector2(-202, 205)
+polygon = PackedVector2Array(1207, -911, 1351, -1018, 2399, -1015, 2572, -933, 2531, -362, 2355, -256, 1414, -246, 1254, -356)

@@ -29,9 +29,6 @@ namespace godot {
 	private:
 		double time_passed;
 		CollisionPolygon2D* poly;
-		PackedVector2Array target_poly;
-		PackedVector2Array init_poly;
-		PackedVector2Array pending_poly;
 		float IMPACT_FORCE;
 		float SPRING_GROWTH_RATE;
 		float MAX_FORCE;
@@ -39,6 +36,8 @@ namespace godot {
 		float normal_weight;
 		float force_weight;
 		float activation;
+		float external_width;
+		bool inverted;
 		unordered_map<RigidBody2D*, SpringTarget> spring_targets;
 
 	protected:
@@ -52,6 +51,10 @@ namespace godot {
 		void _bind_method();
 		void set_spring_force(float s_force);
 		float get_spring_force() const;
+		void set_width(float width);
+		float get_width() const;
+		void set_is_inverted(bool invert);
+		bool get_is_inverted() const;
 		void set_impact_force(float i_force);
 		float get_impact_force() const;
 		void set_threshold(float thresh);
@@ -65,6 +68,7 @@ namespace godot {
 		void _physics_process(double delta) override;
 		void _on_body_entered(Node *body);
 		void _on_body_exited(Node *body);
+		void _create_external(CollisionPolygon2D* poly, float width);
 		Vector2 _calculate_surface(RigidBody2D* rb, SpringTarget spring);
 
 	};
