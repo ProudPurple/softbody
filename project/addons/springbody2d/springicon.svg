@@ -1,0 +1,15 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+ <!-- Outline -->
+
+ <!-- Main shape -->
+ <!-- Dark secondary shape (baked, no opacity) -->
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_1" fill="#6c7eba" height="4" width="64" y="0" x="0"/>
+  <rect id="svg_2" fill="#6c7eba" height="4" width="64" y="60" x="0"/>
+  <rect id="svg_3" fill="#6c7eba" height="64" width="4" y="0" x="0"/>
+  <rect id="svg_4" fill="#6c7eba" height="64" width="4" y="0" x="60"/>
+  <path id="svg_5" d="m48,4l-32,8l0,8l19,7l-19,5l0,8l19,7l-19,5l0,8l32,-8l0,-8l-19,-7l19,-5l0,-8l-19,-7l19,-5l0,-8z" fill="#8da5f3"/>
+  <path id="svg_6" d="m16,20l19,7l13,-3l-19,-7l-13,3zm0,20l19,7l13,-3l-19,-7l-13,3z" fill="#6c7eba"/>
+ </g>
+</svg>

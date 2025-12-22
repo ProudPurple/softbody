@@ -1,0 +1,11 @@
+[configuration]
+entry_symbol = "springbody_library_init"
+compatibility_minimum = "4.1"
+reloadable = true
+
+[libraries]
+windows.debug.x86_64 = "res://addons/springbody2d/bin/libspringbody.windows.template_debug.x86_64.dll"
+windows.release.x86_64 = "res://addons/springbody2d/bin/libspringbody.windows.template_debug.x86_64.dll"
+
+[icons]
+springbody2d = "res://addons/springbody2d/springicon.svg"

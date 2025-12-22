@@ -7,6 +7,7 @@
 #include <godot_cpp/classes/node2d.hpp>
 #include <godot_cpp/classes/geometry2d.hpp>
 #include <godot_cpp/classes/physics_server2d.hpp>
+#include <godot_cpp/classes/image.hpp>
 #include <godot_cpp/classes/rigid_body2d.hpp>
 #include <godot_cpp/classes/method_tweener.hpp>
 #include <godot_cpp/classes/collision_polygon2d.hpp>
@@ -23,8 +24,8 @@ namespace godot {
 		bool active;
 	};
 
-	class SoftBody2D : public Area2D{
-		GDCLASS(SoftBody2D, Area2D);
+	class SpringBody2D : public Area2D{
+		GDCLASS(SpringBody2D, Area2D);
 
 	private:
 		double time_passed;
@@ -44,17 +45,13 @@ namespace godot {
 		static void _bind_methods();
 
 	public:
-		SoftBody2D();
-		~SoftBody2D();
+		SpringBody2D();
+		~SpringBody2D();
 
 		void _ready();
 		void _bind_method();
 		void set_spring_force(float s_force);
 		float get_spring_force() const;
-		void set_width(float width);
-		float get_width() const;
-		void set_is_inverted(bool invert);
-		bool get_is_inverted() const;
 		void set_impact_force(float i_force);
 		float get_impact_force() const;
 		void set_threshold(float thresh);

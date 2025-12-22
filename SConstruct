@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/addons/springbody2d/env python
 import os
 import sys
 
@@ -18,25 +18,24 @@ sources = Glob("src/*.cpp")
 
 if env["platform"] == "macos":
     library = env.SharedLibrary(
-        "project/bin/libsoftbody.{}.{}.framework/libsoftbody.{}.{}".format(
-            env["platform"], env["target"], env["platform"], env["target"]
-        ),
+        "project/addons/springbody2d/bin/libsoftbody{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,
     )
+
 elif env["platform"] == "ios":
     if env["ios_simulator"]:
         library = env.StaticLibrary(
-            "project/bin/libsoftbody.{}.{}.simulator.a".format(env["platform"], env["target"]),
+            "project/addons/springbody2d/bin/libspringbody.{}.{}.simulator.a".format(env["platform"], env["target"]),
             source=sources,
         )
     else:
         library = env.StaticLibrary(
-            "project/bin/libsoftbody.{}.{}.a".format(env["platform"], env["target"]),
+            "project/addons/springbody2d/bin/libspringbody.{}.{}.a".format(env["platform"], env["target"]),
             source=sources,
         )
 else:
     library = env.SharedLibrary(
-        "project/bin/libsoftbody{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
+        "project/addons/springbody2d/bin/libspringbody{}{}".format(env["suffix"], env["SHLIBSUFFIX"]),
         source=sources,
     )
 
