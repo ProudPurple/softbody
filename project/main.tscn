@@ -15,7 +15,6 @@ radius = 81.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(10, 107)
-zoom = Vector2(0.75, 0.75)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-11011, 8879)
@@ -33,7 +32,7 @@ polygon = PackedVector2Array(84671.49, -21918.385, 86398.21, -21918.385, 86338.1
 metadata/_edit_lock_ = true
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(159, 202)
+position = Vector2(-50, -40)
 physics_material_override = SubResource("PhysicsMaterial_0xm2m")
 can_sleep = false
 script = ExtResource("3_lquwl")
@@ -53,11 +52,57 @@ shape = SubResource("CircleShape2D_1bvp3")
 metadata/_edit_lock_ = true
 
 [node name="SpringBody2D" type="SpringBody2D" parent="."]
-physics_max_force = 25.0
-physics_threshold = 0.1
 script = ExtResource("4_1bvp3")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringBody2D"]
-polygon = PackedVector2Array(-656, -131, -484, -268, 552, -261, 707, -169, 681, -9, 545, 71, 379, 67, 276, 137, 285, 243, 365, 272, 554, 246, 688, 314, 695, 404, 580, 493, -441, 489, -639, 354, -656, -131, -1158, -68, -1219, 1042, 1483, 1009, 1458, -917, -1224, -846, -1158, -68)
+position = Vector2(-156, 144)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(527.8789, 1020.66504, 1483, 1009, 1391.1372, 274.96533, 1407.9745, -45.574966, -548.5615, 240.53464, -1430.3232, 1382.4413)
 
 [node name="Polygon2D" type="Polygon2D" parent="SpringBody2D"]
+position = Vector2(-156, 144)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(527.8789, 1020.66504, 1483, 1009, 1391.1372, 274.96533, 1407.9745, -45.574966, -548.5615, 240.53464, -1430.3232, 1382.4413)
+metadata/_edit_lock_ = true
+
+[node name="SpringBody2D2" type="SpringBody2D" parent="."]
+script = ExtResource("4_1bvp3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringBody2D2"]
+position = Vector2(-10.999985, -638.99994)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(527.8789, 1020.66504, 1483, 1009, 1391.1372, 274.96533, 1407.9745, -45.574966, -548.5615, 240.53464, -1430.3232, 1382.4413)
+
+[node name="Polygon2D" type="Polygon2D" parent="SpringBody2D2"]
+position = Vector2(-10.999985, -638.99994)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(527.8789, 1020.66504, 1483, 1009, 1391.1372, 274.96533, 1407.9745, -45.574966, -548.5615, 240.53464, -1430.3232, 1382.4413)
+metadata/_edit_lock_ = true
+
+[node name="SpringBody2D3" type="SpringBody2D" parent="."]
+script = ExtResource("4_1bvp3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringBody2D3"]
+position = Vector2(734, -519.99994)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(1481.1161, 3177.5889, 1483, 1009, 1391.1372, 274.96533, 1407.9745, -45.574966, -548.5615, 240.53464, -1072.7424, 2795.2656)
+
+[node name="Polygon2D" type="Polygon2D" parent="SpringBody2D3"]
+position = Vector2(734, -519.99994)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(1481.1161, 3177.5889, 1483, 1009, 1391.1372, 274.96533, 1407.9745, -45.574966, -548.5615, 240.53464, -1072.7424, 2795.2656)
+metadata/_edit_lock_ = true
+
+[node name="SpringBody2D4" type="SpringBody2D" parent="."]
+script = ExtResource("4_1bvp3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpringBody2D4"]
+position = Vector2(-1015, -260)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(14.221924, 2438.2617, 1483.1477, 2537.0073, 1391.1372, 274.96533, 1113.3767, -410.175, -548.5615, 240.53464, -1430.3232, 1382.4413)
+
+[node name="Polygon2D" type="Polygon2D" parent="SpringBody2D4"]
+position = Vector2(-1015, -260)
+scale = Vector2(0.4921964, 0.3949535)
+polygon = PackedVector2Array(14.221924, 2438.2617, 1483.1477, 2537.0073, 1391.1372, 274.96533, 1113.3767, -410.175, -548.5615, 240.53464, -1430.3232, 1382.4413)
+metadata/_edit_lock_ = true

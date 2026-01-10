@@ -38,7 +38,6 @@ namespace godot {
 		float force_weight;
 		float activation;
 		float external_width;
-		bool inverted;
 		unordered_map<RigidBody2D*, SpringTarget> spring_targets;
 
 	protected:
@@ -46,7 +45,6 @@ namespace godot {
 
 	public:
 		SpringBody2D();
-		~SpringBody2D();
 
 		void _ready();
 		void _bind_method();
@@ -65,8 +63,7 @@ namespace godot {
 		void _physics_process(double delta) override;
 		void _on_body_entered(Node *body);
 		void _on_body_exited(Node *body);
-		void _create_external(CollisionPolygon2D* poly, float width);
-		Vector2 _calculate_surface(RigidBody2D* rb, SpringTarget spring);
+		Vector2 _calculate_surface_normal(RigidBody2D* rb, SpringTarget spring);
 
 	};
 

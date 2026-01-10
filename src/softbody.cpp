@@ -26,10 +26,10 @@ void SpringBody2D::_bind_methods() {
 
 	ADD_GROUP("Physics", "physics_");
 
-    ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_release_magnitude", PROPERTY_HINT_RANGE, "-1000,1000,0.1"),"set_spring_force","get_spring_force");
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_max_force", PROPERTY_HINT_RANGE, "-1000,1000,0.1"),"set_max_force","get_max_force");
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_threshold", PROPERTY_HINT_RANGE, "0,15,0.01"),"set_threshold","get_threshold");
-	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_decay_magnitude", PROPERTY_HINT_RANGE, "-1000,1000,0.1"),"set_growth_force","get_growth_force");
+    ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_release_magnitude", PROPERTY_HINT_RANGE, "0,25,0.1"),"set_spring_force","get_spring_force");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_max_force", PROPERTY_HINT_RANGE, "0,1000,0.1"),"set_max_force","get_max_force");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_threshold", PROPERTY_HINT_RANGE, "0,1,0.01"),"set_threshold","get_threshold");
+	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_decay_mult", PROPERTY_HINT_RANGE, "0,10,0.1"),"set_growth_force","get_growth_force");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "physics_normal_weight", PROPERTY_HINT_RANGE, "0.6,1,0.01"),"set_normal_weight","get_normal_weight");
 
 	ADD_GROUP("Visual", "visual_");
@@ -44,12 +44,11 @@ SpringBody2D::SpringBody2D() {
 	IMPACT_FORCE = 10;
 	MAX_FORCE = 100;
 	SPRING_FORCE = 10;
-	SPRING_GROWTH_RATE = 10;
-	activation = 4;
+	SPRING_GROWTH_RATE = 5;
+	activation = 0.5;
 	normal_weight = 0.7;
 	force_weight = 0.3;
 	external_width = 500;
-	inverted = true;
 }
 
 void SpringBody2D::set_spring_force(float s_force) { SPRING_FORCE = s_force; }
@@ -64,10 +63,6 @@ void SpringBody2D::set_max_force(float m_force) { MAX_FORCE = m_force; }
 float SpringBody2D::get_max_force() const { return MAX_FORCE; }
 void SpringBody2D::set_growth_force(float g_force) { SPRING_GROWTH_RATE = g_force; }
 float SpringBody2D::get_growth_force() const { return SPRING_GROWTH_RATE; }
-
-SpringBody2D::~SpringBody2D() {
-	// Add your cleanup here.
-}
 
 void SpringBody2D::_ready() {
 	poly = get_node<CollisionPolygon2D>("CollisionPolygon2D");
@@ -84,31 +79,33 @@ void SpringBody2D::_physics_process(double delta) {
 			Vector2 normal = spring.collision_normal;	
 
 			if (normal == Vector2(0,0)) {
-				spring.collision_normal = _calculate_surface(it.first, spring);
+				spring.collision_normal = _calculate_surface_normal(it.first, spring);
 			} else {
 				it.first->set_gravity_scale(0);
-				Vector2 temp = _calculate_surface(it.first, spring);
-				if (temp != Vector2(0,0)) {
-					spring.collision_normal = temp;
-					normal = temp;
-				}
-				//print_line(vel.dot(normal) <= 0);
-				// Separate normal and tangential components
+				Vector2 temp = _calculate_surface_normal(it.first, spring);
+
+				if (temp != Vector2(0,0))
+					spring.collision_normal = normal = temp;
+
 				Vector2 vel_normal = normal * vel.dot(normal);
 				Vector2 vel_tangent = vel - vel_normal;
+
 				// Reverse normal to create slingshot
-				spring.buildUp += (vel.dot(normal) < -activation) ? -vel.dot(normal) * delta : 0;
+				print_line((vel * delta).dot(normal));
+				spring.buildUp += ((vel * delta).dot(normal) < -activation) ? -vel.dot(normal) * delta * SPRING_GROWTH_RATE * 10 : 0;
 				float decay = exp(-delta * spring.buildUp);
 				vel_normal *= decay;
 				vel_tangent *= decay;
-				// Target velocity combines tangential motion + slingshot
-				Vector2 target_vel_normal = (vel_normal + vel_tangent) / SPRING_GROWTH_RATE;
-				Vector2 impulse = (target_vel_normal - vel) * it.first->get_mass();
-				if (((vel * delta).dot(normal) >= -activation && spring.buildUp >= 0)) {
+
+				Vector2 impulse = (vel_normal + vel_tangent - vel);
+
+				if ((vel * delta).dot(normal) >= -activation && spring.buildUp >= 0) {
 					Vector2 force_dir = Vector2(spring.init_force[0], spring.init_force[1]).normalized();
 					Vector2 dir = (force_dir * force_weight + spring.collision_normal * normal_weight).normalized();
-					impulse = dir * spring.buildUp * (SPRING_FORCE * 10) * delta;
+					impulse = dir * spring.buildUp * SPRING_FORCE * delta;
+					print_line(impulse);
 				}
+
 				// Clamp maximum force
 				if (impulse.length() > MAX_FORCE)
 					impulse = impulse.normalized() * MAX_FORCE;
@@ -123,10 +120,8 @@ void SpringBody2D::_physics_process(double delta) {
 void SpringBody2D::_on_body_entered(Node *body) {
 	if (body->is_class("RigidBody2D")) {
 		RigidBody2D *rb = Object::cast_to<RigidBody2D>(body);
-
-		float initial_delta = 1.0 / 30.0f; // approximate 1 fram
+		float initial_delta = 1.0 / 30.0f;
 		Vector2 prev_pos = rb->get_global_position() - rb->get_linear_velocity() * initial_delta;
-
 		spring_targets[rb] = SpringTarget{rb->get_linear_velocity(), prev_pos, Vector2(0,0), 0, true};
 	}
 }
@@ -141,13 +136,12 @@ void SpringBody2D::_on_body_exited(Node *body) {
 	}
 }
 
-Vector2 SpringBody2D::_calculate_surface(RigidBody2D* rb, SpringTarget spring) {
+Vector2 SpringBody2D::_calculate_surface_normal(RigidBody2D* rb, SpringTarget spring) {
     Vector2 p0 = spring.init_pos, p1 = rb->get_global_position();
     Vector2 vel = rb->get_linear_velocity().normalized();
 
-    if (vel.length() == 0) {
+    if (vel.length() == 0)
         return Vector2(0,0);
-	}
 
     PackedVector2Array poly_points = poly->get_polygon();
     Transform2D xf = poly->get_global_transform();
@@ -156,7 +150,7 @@ Vector2 SpringBody2D::_calculate_surface(RigidBody2D* rb, SpringTarget spring) {
     Vector2 best_normal = Vector2(0,0);
     float best_dot = -FLT_MAX, best_dist = FLT_MAX;
 
-	for (int i = 0; i < poly_points.size() - (inverted ? 5 : 0); i++) {
+	for (int i = 0; i < poly_points.size(); i++) {
 		Vector2 a = xf.xform(poly_points[i]);
 		Vector2 b = xf.xform(poly_points[(i+1)%poly_points.size()]);
 
@@ -179,16 +173,5 @@ Vector2 SpringBody2D::_calculate_surface(RigidBody2D* rb, SpringTarget spring) {
 		}
 	}
 
-
     return best_normal * -1;
 }
-
-
-/* SUDOCODE TIME
-ON_HIT() {
-	CREATE_NODE AT HIT POSITION
-	MOVE NODE Normalized
-	APPLY SLIGHT ADDITIVE OPPOSITE VELOCITY
-}
-
-*/
